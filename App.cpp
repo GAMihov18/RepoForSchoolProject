@@ -4,10 +4,11 @@
 using namespace std;
 
 //----------------Innitializing the data structures----------------------------
-//-------Data for each weapon attachment(e.g. scope, suppressor, bipod)---------
+//-------Data for each weapon attachment(e.g. scope, suppressor, bipod)--------
 struct ATTACHMENT_DATA
 {
-  string att_type;
+  string att_type;//e.g. is it a scope, a flashlight or a suppressor
+  string att_position;//e.g. underrail, top rail, side rail, barrel
 };
 
 
@@ -18,42 +19,84 @@ struct WEAPON_DATA
   string w_name;
   string w_manufacturer;
   int w_manufactureYear;
-  bool hasAttachment;
+  int cleanPrice;
+  bool w_hasAttachment = false;
   ATTACHMENT_DATA w_attachment;
+  int priceWithAttachment;
 };
 
 //----------------------End of structure initialization-------------------------
 
+//---------------------Start of function initializations------------------------
+
+void insertWeaponData(WEAPON_DATA *weapon, int n)
+{
+  for (int i = 0; i < n; i++)
+  {
+    cout << "================================================="<<endl;
+    cout << "Name: "; cin >> weapon[i].w_name;
+    cout << endl <<"Manufacturer: "; cin >> weapon[i].w_manufacturer;
+    cout << endl <<"Year of Manufacturing: "; cin >> weapon[i].w_manufactureYear;
+    cout << endl <<"hasAttachment(default: false): "; cin >> weapon[i].w_hasAttachment;
+    if (weapon[i].w_hasAttachment==true)
+    {
+      cout<<endl<<"Type of attachment: ";cin >> weapon[i].w_attachment.att_type;
+      cout<<endl<<"Attachment position: ";cin >> weapon[i].w_attachment.att_position;
+      cout<<endl<<"Price of weapon with the attachments: ";cin >> weapon[i].priceWithAttachment;
+    }
+  }
+}
 
 //--------------------------The core of the program-----------------------------
 int main()
 {
   WEAPON_DATA Weapons[100];
   int selection;
-menu:
+menu://goto point for the switch case below
+//-----------------------The main menu of the program---------------------------
   cout << "+--------------------------------------------+" << endl;
   cout << "|           Please choose a number           |" << endl;
   cout << "|                                            |" << endl;
   cout << "|  1. See available firearms                 |" << endl;
   cout << "|  2. Search available firearms              |" << endl;
-  cout << "|  3. Sort available firearms                |" << endl;
-  cout << "|  4. Add available firearm                  |" << endl;
+  cout << "|    -> 3: Sort available firearms           |" << endl;
+  cout << "|  4. Order firearm                          |" << endl;
+  cout << "|  5. Add available firearm                  |" << endl;
   cout << "|  0. Exit                                   |" << endl;
   cout << "|                                            |" << endl;
   cout << "+--------------------------------------------+" << endl;
   cout << ":";
-defaultCaseError:
+defaultCaseError://goto point if a user enters an unapplicable number
   cin >> selection;
+//Switch-case selecting the different menus
   switch (selection)
   {
   case 1:
+  cout<<"See available firearms"<<endl;
     goto menu;
+
   case 2:
+  cout<<"Search available firearms"<<endl;
     goto menu;
+
   case 3:
+  cout<<"Sort available firearms"<<endl;
     goto menu;
+
   case 4:
+  cout<<"Order firearm"<<endl;
     goto menu;
+
+  case 5:
+  cout<<"Add available firearm"<<endl;
+/*
+  int n;
+  cout<<"How many firearms do you want to add?"<<endl;
+  cout<<":"; cin>>n;
+  insertWeaponData(Weapons, n);
+*/
+    goto menu;
+
   case 0:
     break;
   default:
