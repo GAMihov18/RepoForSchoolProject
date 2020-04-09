@@ -29,6 +29,7 @@ struct WEAPON_DATA
 
 //---------------------Start of function initializations------------------------
 
+//--------------Function for inserting the data for the weapons-----------------
 void insertWeaponData(WEAPON_DATA *weapon, int n)
 {
   for (int i = 0; i < n; i++)
@@ -40,20 +41,17 @@ void insertWeaponData(WEAPON_DATA *weapon, int n)
     cout << endl <<"hasAttachment(default: false): "; cin >> weapon[i].w_hasAttachment;
     if (weapon[i].w_hasAttachment==true)
     {
-      cout<<endl<<"Type of attachment: ";cin >> weapon[i].w_attachment.att_type;
-      cout<<endl<<"Attachment position: ";cin >> weapon[i].w_attachment.att_position;
-      cout<<endl<<"Price of weapon with the attachments: ";cin >> weapon[i].priceWithAttachment;
+      cout<<endl<<"Type of attachment: "; cin >> weapon[i].w_attachment.att_type;
+      cout<<endl<<"Attachment position: "; cin >> weapon[i].w_attachment.att_position;
+      cout<<endl<<"Price of weapon with the attachments: "; cin >> weapon[i].priceWithAttachment;
     }
   }
 }
 
-//--------------------------The core of the program-----------------------------
-int main()
+void mainMenu()
 {
-  WEAPON_DATA Weapons[100];
   int selection;
-menu://goto point for the switch case below
-//-----------------------The main menu of the program---------------------------
+  //-----------------------The main menu of the program---------------------------
   cout << "+--------------------------------------------+" << endl;
   cout << "|           Please choose a number           |" << endl;
   cout << "|                                            |" << endl;
@@ -66,27 +64,23 @@ menu://goto point for the switch case below
   cout << "|                                            |" << endl;
   cout << "+--------------------------------------------+" << endl;
   cout << ":";
-defaultCaseError://goto point if a user enters an unapplicable number
+DefaultCaseError://Default case tag
   cin >> selection;
 //Switch-case selecting the different menus
   switch (selection)
   {
   case 1:
   cout<<"See available firearms"<<endl;
-    goto menu;
-
+    mainMenu();
   case 2:
   cout<<"Search available firearms"<<endl;
-    goto menu;
-
+    mainMenu();
   case 3:
   cout<<"Sort available firearms"<<endl;
-    goto menu;
-
+    mainMenu();
   case 4:
   cout<<"Order firearm"<<endl;
-    goto menu;
-
+    mainMenu();
   case 5:
   cout<<"Add available firearm"<<endl;
 /*
@@ -95,11 +89,18 @@ defaultCaseError://goto point if a user enters an unapplicable number
   cout<<":"; cin>>n;
   insertWeaponData(Weapons, n);
 */
-    goto menu;
-
+    mainMenu();
   case 0:
     break;
   default:
-    cout << "Please, insert an applicable number:"; goto defaultCaseError;
+    cout << "Please, insert an applicable number:"; goto DefaultCaseError;
   }
+}
+
+
+//--------------------------The core of the program-----------------------------
+int main()
+{
+  WEAPON_DATA Weapons[100];
+  mainMenu();
 }
