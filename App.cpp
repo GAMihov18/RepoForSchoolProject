@@ -3,7 +3,13 @@
 
 using namespace std;
 
-//----------------Innitializing the data structures----------------------------
+//--------------------Initialization of global variables-----------------------
+WEAPON_DATA Weapons[100];
+int weaponCount;
+
+//-------------------End of global variable initialization---------------------
+
+//---------------------Innitializing the data structures-----------------------
 //-------Data for each weapon attachment(e.g. scope, suppressor, bipod)--------
 struct ATTACHMENT_DATA
 {
@@ -47,10 +53,10 @@ void insertWeaponData(WEAPON_DATA *weapon, int n)
     }
   }
 }
-
+//-----------------------Structure printing the main menu-------------------------
 void mainMenu()
 {
-  int selection;
+  
   //-----------------------The main menu of the program---------------------------
   cout << "+--------------------------------------------+" << endl;
   cout << "|           Please choose a number           |" << endl;
@@ -64,7 +70,7 @@ void mainMenu()
   cout << "|                                            |" << endl;
   cout << "+--------------------------------------------+" << endl;
   cout << ":";
-DefaultCaseError://Default case tag
+  int selection;
   cin >> selection;
 //Switch-case selecting the different menus
   switch (selection)
@@ -93,7 +99,7 @@ DefaultCaseError://Default case tag
   case 0:
     break;
   default:
-    cout << "Please, insert an applicable number:"; goto DefaultCaseError;
+    cout << "Please, insert an applicable number:"; mainMenu();
   }
 }
 
@@ -101,6 +107,5 @@ DefaultCaseError://Default case tag
 //--------------------------The core of the program-----------------------------
 int main()
 {
-  WEAPON_DATA Weapons[100];
   mainMenu();
 }
