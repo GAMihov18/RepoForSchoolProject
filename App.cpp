@@ -3,9 +3,7 @@
 
 using namespace std;
 
-//--------------------Initialization of global variables-----------------------
-WEAPON_DATA Weapons[100];
-int weaponCount;
+
 
 //-------------------End of global variable initialization---------------------
 
@@ -33,30 +31,38 @@ struct WEAPON_DATA
 
 //----------------------End of structure initialization-------------------------
 
+//--------------------Initialization of global variables-----------------------
+WEAPON_DATA Weapons[100];
+int weaponCount;
+
 //---------------------Start of function initializations------------------------
 
 //--------------Function for inserting the data for the weapons-----------------
-void insertWeaponData(WEAPON_DATA *weapon, int n)
+/*
+void insertWeaponData()
 {
+  WEAPON_DATA weapon[100];
+  int n;
   for (int i = 0; i < n; i++)
   {
-    cout << "================================================="<<endl;
+    cout << "=================================================" << endl;
     cout << "Name: "; cin >> weapon[i].w_name;
-    cout << endl <<"Manufacturer: "; cin >> weapon[i].w_manufacturer;
-    cout << endl <<"Year of Manufacturing: "; cin >> weapon[i].w_manufactureYear;
-    cout << endl <<"hasAttachment(default: false): "; cin >> weapon[i].w_hasAttachment;
-    if (weapon[i].w_hasAttachment==true)
+    cout << endl << "Manufacturer: "; cin >> weapon[i].w_manufacturer;
+    cout << endl << "Year of Manufacturing: "; cin >> weapon[i].w_manufactureYear;
+    cout << endl << "hasAttachment(default: false): "; cin >> weapon[i].w_hasAttachment;
+    if (weapon[i].w_hasAttachment == true)
     {
-      cout<<endl<<"Type of attachment: "; cin >> weapon[i].w_attachment.att_type;
-      cout<<endl<<"Attachment position: "; cin >> weapon[i].w_attachment.att_position;
-      cout<<endl<<"Price of weapon with the attachments: "; cin >> weapon[i].priceWithAttachment;
+      cout << endl << "Type of attachment: "; cin >> weapon[i].w_attachment.att_type;
+      cout << endl << "Attachment position: "; cin >> weapon[i].w_attachment.att_position;
+      cout << endl << "Price of weapon with the attachments: "; cin >> weapon[i].priceWithAttachment;
     }
   }
 }
+*/
 //-----------------------Structure printing the main menu-------------------------
 void mainMenu()
 {
-  
+
   //-----------------------The main menu of the program---------------------------
   cout << "+--------------------------------------------+" << endl;
   cout << "|           Please choose a number           |" << endl;
@@ -72,34 +78,39 @@ void mainMenu()
   cout << ":";
   int selection;
   cin >> selection;
-//Switch-case selecting the different menus
+  //Switch-case selecting the different menus
   switch (selection)
   {
   case 1:
-  cout<<"See available firearms"<<endl;
+    cout << "See available firearms" << endl;
     mainMenu();
+    break;
   case 2:
-  cout<<"Search available firearms"<<endl;
+    cout << "Search available firearms" << endl;
     mainMenu();
+    break;
   case 3:
-  cout<<"Sort available firearms"<<endl;
+    cout << "Sort available firearms" << endl;
     mainMenu();
+    break;
   case 4:
-  cout<<"Order firearm"<<endl;
+    cout << "Order firearm" << endl;
     mainMenu();
+    break;
   case 5:
-  cout<<"Add available firearm"<<endl;
-/*
-  int n;
-  cout<<"How many firearms do you want to add?"<<endl;
-  cout<<":"; cin>>n;
-  insertWeaponData(Weapons, n);
-*/
+    cout << "Add available firearm" << endl;
+    /*
+      int n;
+      cout<<"How many firearms do you want to add?"<<endl;
+      cout<<":"; cin>>n;
+      insertWeaponData(Weapons, n);
+    */
     mainMenu();
+    break;
   case 0:
     break;
   default:
-    cout << "Please, insert an applicable number:"; mainMenu();
+    cout << "Please, insert an applicable number"<<endl; mainMenu();
   }
 }
 
