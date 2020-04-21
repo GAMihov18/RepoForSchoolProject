@@ -33,16 +33,18 @@ struct WEAPON_DATA
 
 //--------------------Initialization of global variables-----------------------
 WEAPON_DATA Weapons[100];
-int weaponCount;
+int weaponCount = 0;
 
 //---------------------Start of function initializations------------------------
 
 //--------------Function for inserting the data for the weapons-----------------
-/*
+
 void insertWeaponData()
 {
   WEAPON_DATA weapon[100];
   int n;
+  cout << "How many weapons do you want to insert?" << endl;
+  cout << ":"; cin >> n;
   for (int i = 0; i < n; i++)
   {
     cout << "=================================================" << endl;
@@ -57,13 +59,57 @@ void insertWeaponData()
       cout << endl << "Price of weapon with the attachments: "; cin >> weapon[i].priceWithAttachment;
     }
   }
+
+  for (int i = weaponCount; i < (n + weaponCount); i++)
+  {
+    Weapons[i].w_name = weapon[i].w_name;
+    Weapons[i].w_manufacturer = weapon[i].w_manufacturer;
+    Weapons[i].w_manufactureYear = weapon[i].w_manufactureYear;
+    Weapons[i].w_hasAttachment = weapon[i].w_hasAttachment;
+    if (weapon[i].w_hasAttachment == true)
+    {
+      Weapons[i].w_attachment.att_type = weapon[i].w_attachment.att_type;
+      Weapons[i].w_attachment.att_position = weapon[i].w_attachment.att_position;
+      Weapons[i].priceWithAttachment = weapon[i].priceWithAttachment;
+    }
+
+  }
+
+
 }
-*/
+
+void selection(int selection)
+{
+  //Switch-case selecting the different menus
+  switch (selection)
+  {
+  case 1:
+    cout << "See available firearms" << endl;
+    break;
+  case 2:
+    cout << "Search available firearms" << endl;
+    break;
+  case 3:
+    cout << "Sort available firearms" << endl;
+    break;
+  case 4:
+    cout << "Order firearm" << endl;
+    break;
+  case 5:
+    insertWeaponData();
+    break;
+  case 0:
+    break;
+  default:
+    cout << "Please, insert an applicable number" << endl; break;
+  }
+}
+
 //-----------------------Structure printing the main menu-------------------------
-void mainMenu()
+void mainMenu(int input)
 {
 
-  //-----------------------The main menu of the program---------------------------
+  //------------------------The main menu of the program----------------------------
   cout << "+--------------------------------------------+" << endl;
   cout << "|           Please choose a number           |" << endl;
   cout << "|                                            |" << endl;
@@ -76,47 +122,17 @@ void mainMenu()
   cout << "|                                            |" << endl;
   cout << "+--------------------------------------------+" << endl;
   cout << ":";
-  int selection;
-  cin >> selection;
-  //Switch-case selecting the different menus
-  switch (selection)
-  {
-  case 1:
-    cout << "See available firearms" << endl;
-    mainMenu();
-    break;
-  case 2:
-    cout << "Search available firearms" << endl;
-    mainMenu();
-    break;
-  case 3:
-    cout << "Sort available firearms" << endl;
-    mainMenu();
-    break;
-  case 4:
-    cout << "Order firearm" << endl;
-    mainMenu();
-    break;
-  case 5:
-    cout << "Add available firearm" << endl;
-    /*
-      int n;
-      cout<<"How many firearms do you want to add?"<<endl;
-      cout<<":"; cin>>n;
-      insertWeaponData(Weapons, n);
-    */
-    mainMenu();
-    break;
-  case 0:
-    break;
-  default:
-    cout << "Please, insert an applicable number"<<endl; mainMenu();
-  }
+  cin >> input;
+  selection(input);
 }
 
 
 //--------------------------The core of the program-----------------------------
 int main()
 {
-  mainMenu();
+  int input=1;
+  while (input!=0)
+  {
+    mainMenu(input);
+  }
 }
