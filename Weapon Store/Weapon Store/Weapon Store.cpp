@@ -34,6 +34,7 @@ struct WEAPON_DATA
 //--------------------Initialization of global variables-----------------------
 WEAPON_DATA Weapons[100];
 int weaponCount = 0;
+int input = 1;
 
 //---------------------Start of function initializations------------------------
 
@@ -41,7 +42,7 @@ int weaponCount = 0;
 
 void insertWeaponData()
 {
-    WEAPON_DATA weapon[100];
+    WEAPON_DATA weapon[100];//Initialising local array
     int n;
     cout << "How many weapons do you want to insert?" << endl;
     cout << ":"; cin >> n;
@@ -51,7 +52,7 @@ void insertWeaponData()
         cout << "Name: "; cin >> weapon[i].w_name;
         cout << endl << "Manufacturer: "; cin >> weapon[i].w_manufacturer;
         cout << endl << "Year of Manufacturing: "; cin >> weapon[i].w_manufactureYear;
-        cout << endl << "hasAttachment(default: false): "; cin >> weapon[i].w_hasAttachment;
+        cout << endl << "Does the weapon have an attachment?(1=true/0=false): "; cin >> weapon[i].w_hasAttachment;
         if (weapon[i].w_hasAttachment == true)
         {
             cout << endl << "Type of attachment: "; cin >> weapon[i].w_attachment.att_type;
@@ -106,7 +107,7 @@ void selection(int selection)
 }
 
 //-----------------------Structure printing the main menu-------------------------
-void mainMenu(int input)
+void mainMenu()
 {
 
     //------------------------The main menu of the program----------------------------
@@ -130,9 +131,8 @@ void mainMenu(int input)
 //--------------------------The core of the program-----------------------------
 int main()
 {
-    int input = 1;
     while (input != 0)
     {
-        mainMenu(input);
+        mainMenu();
     }
 }
