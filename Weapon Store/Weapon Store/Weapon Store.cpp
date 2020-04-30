@@ -84,13 +84,35 @@ void insertWeaponData()
 
 }
 
+void displayWeapons ()
+{    
+
+	for (int i = 0; i < weaponCount; i++)
+	{
+		cout << "Id:" <<Weapons[i].id<< endl;
+		cout << "Name(text, no spaces): "; cin >> Weapons[i].w_name;
+		cout << endl << "Manufacturer(text, no spaces): "; cin >> Weapons[i].w_manufacturer;
+		cout << endl << "Year of Manufacturing(number): "; cin >>Weapons[i].w_manufactureYear;
+		cout << endl << "Price(number): "; cin >> Weapons[i].cleanPrice;
+		cout << endl << "Does the weapon have an attachment?(1=true/0=false): "; cin >> Weapons[i].w_hasAttachment;
+		if (Weapons[i].w_hasAttachment == true)
+		{
+			cout << endl << "Type of attachment: "; cout<< Weapons[i].w_attachment.att_type;
+			cout << endl << "Attachment position: "; cout<< Weapons[i].w_attachment.att_position;
+			cout << endl << "Price of weapon with the attachments: "; cout<< Weapons[i].priceWithAttachment;
+		}
+	}
+}
+
+
+
 void selection(int selection)
 {
     //Switch-case selecting the different menus
     switch (selection)
     {
     case 1:
-        cout << "See available firearms" << endl;
+		displayWeapons();
         break;
     case 2:
         cout << "Search available firearms" << endl;
