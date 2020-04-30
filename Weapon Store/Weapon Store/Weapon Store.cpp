@@ -20,6 +20,7 @@ struct ATTACHMENT_DATA
 //------------------------------Main Structure---------------------------------
 struct WEAPON_DATA
 {
+    int id;
     string w_name;
     string w_manufacturer;
     int w_manufactureYear;
@@ -35,7 +36,7 @@ struct WEAPON_DATA
 WEAPON_DATA Weapons[100];
 int weaponCount = 0;
 int input = 1;
-
+int globalId = 0;
 //---------------------Start of function initializations------------------------
 
 //--------------Function for inserting the data for the weapons-----------------
@@ -46,26 +47,30 @@ void insertWeaponData()
     int n;
     cout << "How many weapons do you want to insert?" << endl;
     cout << ":"; cin >> n;
+    //for, inserting data in local array
     for (int i = 0; i < n; i++)
     {
         cout << "=================================================" << endl;
-        cout << "Name: "; cin >> weapon[i].w_name;
-        cout << endl << "Manufacturer: "; cin >> weapon[i].w_manufacturer;
-        cout << endl << "Year of Manufacturing: "; cin >> weapon[i].w_manufactureYear;
+        cout << "Name(text, no spaces): "; cin >> weapon[i].w_name;
+        cout << endl << "Manufacturer(text, no spaces): "; cin >> weapon[i].w_manufacturer;
+        cout << endl << "Year of Manufacturing(number): "; cin >> weapon[i].w_manufactureYear;
+        cout << endl << "Price(number): "; cin >> weapon[i].cleanPrice;
         cout << endl << "Does the weapon have an attachment?(1=true/0=false): "; cin >> weapon[i].w_hasAttachment;
         if (weapon[i].w_hasAttachment == true)
         {
-            cout << endl << "Type of attachment: "; cin >> weapon[i].w_attachment.att_type;
-            cout << endl << "Attachment position: "; cin >> weapon[i].w_attachment.att_position;
+            cout << endl << "Type of attachment(text, no spaces): "; cin >> weapon[i].w_attachment.att_type;
+            cout << endl << "Attachment position(text, no spaces): "; cin >> weapon[i].w_attachment.att_position;
             cout << endl << "Price of weapon with the attachments: "; cin >> weapon[i].priceWithAttachment;
         }
     }
-
+    //for, transferring data from the local array to the global one
     for (int i = weaponCount; i < (n + weaponCount); i++)
     {
+        Weapons[i].id = globalId++;
         Weapons[i].w_name = weapon[i].w_name;
         Weapons[i].w_manufacturer = weapon[i].w_manufacturer;
         Weapons[i].w_manufactureYear = weapon[i].w_manufactureYear;
+        Weapons[i].cleanPrice= weapon[i].cleanPrice;
         Weapons[i].w_hasAttachment = weapon[i].w_hasAttachment;
         if (weapon[i].w_hasAttachment == true)
         {
