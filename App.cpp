@@ -130,9 +130,10 @@ void mainMenu(int input)
 //--------------------------The core of the program-----------------------------
 int main()
 {
-  int input=1;
-  while (input!=0)
-  {
-    mainMenu(input);
-  }
+    cout << "wanna test out if publishing from VS2019 works";
+    int input=1;
+    while (input!=0)
+    {
+      mainMenu(input);
+    }
 }
