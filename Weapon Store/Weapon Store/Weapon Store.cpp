@@ -90,11 +90,11 @@ void displayWeapons ()
 	for (int i = 0; i < weaponCount; i++)
 	{
 		cout << "Id:" <<Weapons[i].id<< endl;
-		cout << "Name(text, no spaces): "; cin >> Weapons[i].w_name;
-		cout << endl << "Manufacturer(text, no spaces): "; cin >> Weapons[i].w_manufacturer;
-		cout << endl << "Year of Manufacturing(number): "; cin >>Weapons[i].w_manufactureYear;
-		cout << endl << "Price(number): "; cin >> Weapons[i].cleanPrice;
-		cout << endl << "Does the weapon have an attachment?(1=true/0=false): "; cin >> Weapons[i].w_hasAttachment;
+		cout << "Name: "; cin >> Weapons[i].w_name;
+		cout << endl << "Manufacturer: "; cin >> Weapons[i].w_manufacturer;
+		cout << endl << "Year of Manufacturing: "; cin >>Weapons[i].w_manufactureYear;
+		cout << endl << "Price: "; cin >> Weapons[i].cleanPrice;
+		cout << endl << "Does the weapon have an attachment?: "; cin >> Weapons[i].w_hasAttachment;
 		if (Weapons[i].w_hasAttachment == true)
 		{
 			cout << endl << "Type of attachment: "; cout<< Weapons[i].w_attachment.att_type;
