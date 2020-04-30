@@ -92,22 +92,26 @@ void displayWeapons ()
 
 	for (int i = 0; i < weaponCount; i++)
 	{
-        cout << "Id: "; cout << Weapons[i].id;
-		cout << endl << "Name: "; cout << Weapons[i].w_name;
-		cout << endl << "Manufacturer: "; cout << Weapons[i].w_manufacturer;
-		cout << endl << "Year of Manufacturing: "; cout << Weapons[i].w_manufactureYear;
-		cout << endl << "Price: "; cout << Weapons[i].cleanPrice;
+        cout << "Id: "; cout << Weapons[i].id; 
+        cout << endl << "Name: "; cout << Weapons[i].w_name; 
+        cout << endl << "Manufacturer: "; cout << Weapons[i].w_manufacturer; 
+        cout << endl << "Year of Manufacturing: "; cout << Weapons[i].w_manufactureYear; 
+        cout << endl << "Price: "; cout << Weapons[i].cleanPrice; 
 		cout << endl << "Attachments: "; 
         if (Weapons[i].w_hasAttachment == true)
-            cout << "Yes" << endl;
+        {
+            cout << "Yes"; 
+        }
         else
-            cout << "No" << endl;
-		if (Weapons[i].w_hasAttachment == true)
+        {
+            cout << "No";  
+        }
+        if (Weapons[i].w_hasAttachment == true)
 		{
-			cout << "Type of attachment: "; cout<< Weapons[i].w_attachment.att_type;
-			cout << endl << "Attachment position: "; cout<< Weapons[i].w_attachment.att_position;
-			cout << endl << "Price of weapon with the attachments: "; cout<< Weapons[i].priceWithAttachment;
-            cout << endl;
+        cout << "Type of attachment: "; cout << Weapons[i].w_attachment.att_type; 
+        cout << endl << "Attachment position: "; cout << Weapons[i].w_attachment.att_position; 
+        cout << endl << "Price of weapon with the attachments: "; cout << Weapons[i].priceWithAttachment; 
+        cout << endl;
 		}
 	}
 }
