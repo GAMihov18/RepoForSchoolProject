@@ -35,6 +35,7 @@ struct WEAPON_DATA
 //--------------------Initialization of global variables-----------------------
 WEAPON_DATA Weapons[100];
 int weaponCount = 0;
+int weaponCountBeforeAddition = 0;
 int input = 1;
 int globalId = 0;
 //---------------------Start of function initializations------------------------
@@ -51,6 +52,7 @@ void insertWeaponData()
     for (int i = 0; i < n; i++)
     {
         cout << "=================================================" << endl;
+        weapon[i].id = globalId;
         cout << "Name(text, no spaces): "; cin >> weapon[i].w_name;
         cout << endl << "Manufacturer(text, no spaces): "; cin >> weapon[i].w_manufacturer;
         cout << endl << "Year of Manufacturing(number): "; cin >> weapon[i].w_manufactureYear;
@@ -62,11 +64,13 @@ void insertWeaponData()
             cout << endl << "Attachment position(text, no spaces): "; cin >> weapon[i].w_attachment.att_position;
             cout << endl << "Price of weapon with the attachments: "; cin >> weapon[i].priceWithAttachment;
         }
+        weaponCount++;
+        globalId++;
     }
     //for, transferring data from the local array to the global one
-    for (int i = weaponCount; i < (n + weaponCount); i++)
+    for (int i = weaponCountBeforeAddition; i < (n + weaponCount); i++)
     {
-        Weapons[i].id = globalId++;
+        Weapons[i].id = weapon[i].id;
         Weapons[i].w_name = weapon[i].w_name;
         Weapons[i].w_manufacturer = weapon[i].w_manufacturer;
         Weapons[i].w_manufactureYear = weapon[i].w_manufactureYear;
@@ -80,8 +84,7 @@ void insertWeaponData()
         }
 
     }
-
-
+    weaponCountBeforeAddition = weaponCount;
 }
 
 void displayWeapons ()
@@ -89,17 +92,22 @@ void displayWeapons ()
 
 	for (int i = 0; i < weaponCount; i++)
 	{
-		cout << "Id:" <<Weapons[i].id<< endl;
-		cout << "Name(text, no spaces): "; cin >> Weapons[i].w_name;
-		cout << endl << "Manufacturer(text, no spaces): "; cin >> Weapons[i].w_manufacturer;
-		cout << endl << "Year of Manufacturing(number): "; cin >>Weapons[i].w_manufactureYear;
-		cout << endl << "Price(number): "; cin >> Weapons[i].cleanPrice;
-		cout << endl << "Does the weapon have an attachment?(1=true/0=false): "; cin >> Weapons[i].w_hasAttachment;
+        cout << "Id: "; cout << Weapons[i].id;
+		cout << endl << "Name: "; cout << Weapons[i].w_name;
+		cout << endl << "Manufacturer: "; cout << Weapons[i].w_manufacturer;
+		cout << endl << "Year of Manufacturing: "; cout << Weapons[i].w_manufactureYear;
+		cout << endl << "Price: "; cout << Weapons[i].cleanPrice;
+		cout << endl << "Attachments: "; 
+        if (Weapons[i].w_hasAttachment == true)
+            cout << "Yes" << endl;
+        else
+            cout << "No" << endl;
 		if (Weapons[i].w_hasAttachment == true)
 		{
-			cout << endl << "Type of attachment: "; cout<< Weapons[i].w_attachment.att_type;
+			cout << "Type of attachment: "; cout<< Weapons[i].w_attachment.att_type;
 			cout << endl << "Attachment position: "; cout<< Weapons[i].w_attachment.att_position;
 			cout << endl << "Price of weapon with the attachments: "; cout<< Weapons[i].priceWithAttachment;
+            cout << endl;
 		}
 	}
 }

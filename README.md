@@ -7,11 +7,13 @@ Example insert values
 BarrettM82
 BFM
 2019
-false
+5000
+0
 P2000
 H&K
 2019
-true
+200
+1
 Flashlight
 Underbarrel
-200
+230
