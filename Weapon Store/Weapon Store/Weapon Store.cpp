@@ -24,10 +24,10 @@ struct WEAPON_DATA
     string w_name;
     string w_manufacturer;
     int w_manufactureYear;
-    int cleanPrice;
+    float cleanPrice;
     bool w_hasAttachment = false;
     ATTACHMENT_DATA w_attachment;
-    int priceWithAttachment;
+    float priceWithAttachment;
 };
 
 //----------------------End of structure initialization-------------------------
@@ -53,11 +53,27 @@ void insertWeaponData()
     {
         cout << "=================================================" << endl;
         weapon[i].id = globalId;
-        cout << "Name(text, no spaces): "; cin >> weapon[i].w_name;
-        cout << endl << "Manufacturer(text, no spaces): "; cin >> weapon[i].w_manufacturer;
-        cout << endl << "Year of Manufacturing(number): "; cin >> weapon[i].w_manufactureYear;
-        cout << endl << "Price(number): "; cin >> weapon[i].cleanPrice;
+        do
+        {
+            cout << "Name(text, no spaces): "; cin >> weapon[i].w_name;
+        } while (weapon[i].w_name != (string)weapon[i].w_name);
+        
+        do
+        {
+            cout << endl << "Manufacturer(text, no spaces): "; cin >> weapon[i].w_manufacturer;
+        } while (weapon[i].w_manufacturer !=(string)weapon[i].w_manufacturer);
+        
+        do
+        {
+            cout << endl << "Year of Manufacturing(number): "; cin >> weapon[i].w_manufactureYear;
+        } while (weapon[i].w_manufactureYear != (int)weapon[i].w_manufactureYear);
+        
+        do
+        {
+            cout << endl << "Price(number): "; cin >> weapon[i].cleanPrice;
+        } while (weapon[i].cleanPrice!=(float)weapon[i].cleanPrice);
         cout << endl << "Does the weapon have an attachment?(1=true/0=false): "; cin >> weapon[i].w_hasAttachment;
+       
         if (weapon[i].w_hasAttachment == true)
         {
             cout << endl << "Type of attachment(text, no spaces): "; cin >> weapon[i].w_attachment.att_type;
@@ -82,14 +98,13 @@ void insertWeaponData()
             Weapons[i].w_attachment.att_position = weapon[i].w_attachment.att_position;
             Weapons[i].priceWithAttachment = weapon[i].priceWithAttachment;
         }
-
     }
     weaponCountBeforeAddition = weaponCount;
 }
 
-void displayWeapons ()
+void displayWeapons()
 {    
-
+    //"for" printing out all the available weapons
 	for (int i = 0; i < weaponCount; i++)
 	{
         cout << "Id: "; cout << Weapons[i].id; 
@@ -106,6 +121,7 @@ void displayWeapons ()
         {
             cout << "No";  
         }
+        cout << endl;
         if (Weapons[i].w_hasAttachment == true)
 		{
         cout << "Type of attachment: "; cout << Weapons[i].w_attachment.att_type; 
@@ -113,10 +129,87 @@ void displayWeapons ()
         cout << endl << "Price of weapon with the attachments: "; cout << Weapons[i].priceWithAttachment; 
         cout << endl;
 		}
+        cout << "-------------------------------------------------------"<<endl;
 	}
 }
+void searchFirearms()
+{
 
+}
 
+void sellFirearm()
+{
+    int desiredID;//initialising an int for an ID
+    cout << "Enter the ID of the firearm you want to buy"<<endl;
+    cout << ":"; cin >> desiredID;//the user inserts desired id
+    for (int i = 0; i < weaponCount; i++)//"for" cycling through to find the desired id by the user
+    {
+        if (Weapons[i].id==desiredID)//"if" checkig if the desired id equals the id of the weapon slot
+        {
+            cout << "Bought weapon:"<<endl;
+            cout << "Id: "; cout << Weapons[i].id;
+            cout << endl << "Name: "; cout << Weapons[i].w_name;
+            cout << endl << "Manufacturer: "; cout << Weapons[i].w_manufacturer;
+            cout << endl << "Year of Manufacturing: "; cout << Weapons[i].w_manufactureYear;
+            cout << endl << "Price: "; cout << Weapons[i].cleanPrice;
+            cout << endl << "Attachments: ";
+            if (Weapons[i].w_hasAttachment == true)
+            {
+                cout << "Yes";
+            }
+            else
+            {
+                cout << "No";
+            }
+            cout << endl;
+            if (Weapons[i].w_hasAttachment == true)
+            {
+                cout << "Type of attachment: "; cout << Weapons[i].w_attachment.att_type;
+                cout << endl << "Attachment position: "; cout << Weapons[i].w_attachment.att_position;
+                cout << endl << "Price of weapon with the attachments: "; cout << Weapons[i].priceWithAttachment;
+                cout << endl;
+            }
+            char confirmation;//initialising char for coonfirmation
+            cout << "Confirm?(Y/N): "; cin >> confirmation;//cin char for confirmation
+            if (confirmation=='Y'|| confirmation == 'y')//check if confirmation is Y or y
+            {
+                //clears all fields of selected weapon
+                Weapons[i].id = NULL;
+                Weapons[i].w_name = "";
+                Weapons[i].w_manufacturer = "";
+                Weapons[i].w_manufactureYear = NULL;
+                Weapons[i].cleanPrice = NULL;
+                if (Weapons[i].w_hasAttachment == true)
+                {
+                    Weapons[i].w_attachment.att_type = "";
+                    Weapons[i].w_attachment.att_position = "";
+                    Weapons[i].priceWithAttachment = NULL;
+                }
+                //last weapon becomes selected weapon
+                Weapons[i].id = Weapons[weaponCount-1].id;
+                Weapons[i].w_name = Weapons[weaponCount - 1].w_name;
+                Weapons[i].w_manufacturer = Weapons[weaponCount - 1].w_manufacturer;
+                Weapons[i].w_manufactureYear = Weapons[weaponCount - 1].w_manufactureYear;
+                Weapons[i].cleanPrice = Weapons[weaponCount - 1].cleanPrice;
+                if (Weapons[i].w_hasAttachment == true)
+                {
+                    Weapons[i].w_attachment.att_type = Weapons[weaponCount - 1].w_attachment.att_type;
+                    Weapons[i].w_attachment.att_position = Weapons[weaponCount - 1].w_attachment.att_position;
+                    Weapons[i].priceWithAttachment = Weapons[weaponCount - 1].priceWithAttachment;
+                }
+                weaponCount--;
+            }
+            else if(confirmation == 'N' || confirmation == 'n')
+            {
+                cout << "Do you want to select a new weapon(Y/N): "; cin >> confirmation;//check if the customer wants to enter a new id
+                if (confirmation == 'Y' || confirmation == 'y')
+                {
+                    sellFirearm();
+                }
+            }
+        }
+    }
+}
 
 void selection(int selection)
 {
@@ -133,7 +226,7 @@ void selection(int selection)
         cout << "Sort available firearms" << endl;
         break;
     case 4:
-        cout << "Order firearm" << endl;
+        sellFirearm();
         break;
     case 5:
         insertWeaponData();
@@ -174,4 +267,5 @@ int main()
     {
         mainMenu();
     }
+    cout << "Goodbye!";
 }
