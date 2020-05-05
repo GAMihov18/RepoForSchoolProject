@@ -4,9 +4,6 @@
 using namespace std;
 
 
-
-//-------------------End of global variable initialization---------------------
-
 //---------------------Innitializing the data structures-----------------------
 //-------Data for each weapon attachment(e.g. scope, suppressor, bipod)--------
 struct ATTACHMENT_DATA
@@ -29,7 +26,6 @@ struct WEAPON_DATA
     ATTACHMENT_DATA w_attachment;
     float priceWithAttachment;
 };
-
 //-----------------------End of structure initialization--------------------------
 
 //---------------------Initialization of global variables-------------------------
@@ -38,6 +34,8 @@ int weaponCount = 0;
 int weaponCountBeforeAddition = 0;
 int input = 1;
 int globalId = 0;
+//--------------------End of global variable initialization-----------------------
+
 //----------------------Start of function initializations-------------------------
 
 //---------------Function for inserting the data for the weapons------------------
