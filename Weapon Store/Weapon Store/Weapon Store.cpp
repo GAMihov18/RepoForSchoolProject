@@ -20,7 +20,7 @@ struct ATTACHMENT_DATA
 //------------------------------Main Structure---------------------------------
 struct WEAPON_DATA
 {
-    int id;
+    int id; 
     string w_name;
     string w_manufacturer;
     int w_manufactureYear;
@@ -234,13 +234,7 @@ void searchSorting(float a,float b,int sel)
     }
 }
 
-//------------------------Function sorting the firearms---------------------------
-void sortFirearms() 
-{
-    WEAPON_DATA temp;
 
-}
- 
 //---------------------Gives data to the previous function------------------------
 void searchFirearms()
 {
@@ -273,6 +267,79 @@ void searchFirearms()
         break;  
     default:
         cout << "Please select a viable number."; searchFirearms();
+        break;
+    }
+}
+
+//------------------------Function sorting the firearms---------------------------
+void sortFirearms()
+{
+    int selection;
+    cout << "+--------------------------------------------+" << endl;
+    cout << "|     Select a criteria for your sort        |" << endl;
+    cout << "|                                            |" << endl;
+    cout << "|  1. Sort by year of manufacturing(>)       |" << endl;
+    cout << "|  2. Sort by price(>)                       |" << endl;
+    cout << "|  3. Sort by price with attachment(>)       |" << endl;
+    cout << "|                                            |" << endl;
+    cout << "+--------------------------------------------+" << endl;
+    cout << ":"; cin >> selection;
+
+    switch (selection)
+    {
+    case 1:
+        for (int i = 0; i < weaponCount-1; i++)
+        {
+            if (Weapons[i].w_manufactureYear> Weapons[i+1].w_manufactureYear)
+            {
+                swap(Weapons[i].id, Weapons[i + 1].id);
+                swap(Weapons[i].w_name, Weapons[i + 1].w_name);
+                swap(Weapons[i].w_manufacturer, Weapons[i + 1].w_manufacturer);
+                swap(Weapons[i].w_manufactureYear, Weapons[i + 1].w_manufactureYear);
+                swap(Weapons[i].cleanPrice, Weapons[i + 1].cleanPrice);
+                swap(Weapons[i].w_hasAttachment, Weapons[i + 1].w_hasAttachment);
+                swap(Weapons[i].w_attachment.att_type, Weapons[i+1].w_attachment.att_type);
+                swap(Weapons[i].w_attachment.att_position, Weapons[i + 1].w_attachment.att_position);
+                swap(Weapons[i].priceWithAttachment, Weapons[i + 1].priceWithAttachment);
+            }
+        }
+        break;
+    case 2:
+        for (int i = 0; i < weaponCount - 1; i++)
+        {
+            if (Weapons[i].cleanPrice > Weapons[i + 1].cleanPrice)
+            {
+                swap(Weapons[i].id, Weapons[i + 1].id);
+                swap(Weapons[i].w_name, Weapons[i + 1].w_name);
+                swap(Weapons[i].w_manufacturer, Weapons[i + 1].w_manufacturer);
+                swap(Weapons[i].w_manufactureYear, Weapons[i + 1].w_manufactureYear);
+                swap(Weapons[i].cleanPrice, Weapons[i + 1].cleanPrice);
+                swap(Weapons[i].w_hasAttachment, Weapons[i + 1].w_hasAttachment);
+                swap(Weapons[i].w_attachment.att_type, Weapons[i + 1].w_attachment.att_type);
+                swap(Weapons[i].w_attachment.att_position, Weapons[i + 1].w_attachment.att_position);
+                swap(Weapons[i].priceWithAttachment, Weapons[i + 1].priceWithAttachment);
+            }
+        }
+        break;
+    case 3:
+        for (int i = 0; i < weaponCount - 1; i++)
+        {
+            if (Weapons[i].priceWithAttachment > Weapons[i + 1].priceWithAttachment)
+            {
+                swap(Weapons[i].id, Weapons[i + 1].id);
+                swap(Weapons[i].w_name, Weapons[i + 1].w_name);
+                swap(Weapons[i].w_manufacturer, Weapons[i + 1].w_manufacturer);
+                swap(Weapons[i].w_manufactureYear, Weapons[i + 1].w_manufactureYear);
+                swap(Weapons[i].cleanPrice, Weapons[i + 1].cleanPrice);
+                swap(Weapons[i].w_hasAttachment, Weapons[i + 1].w_hasAttachment);
+                swap(Weapons[i].w_attachment.att_type, Weapons[i + 1].w_attachment.att_type);
+                swap(Weapons[i].w_attachment.att_position, Weapons[i + 1].w_attachment.att_position);
+                swap(Weapons[i].priceWithAttachment, Weapons[i + 1].priceWithAttachment);
+            }
+        }
+        break;
+    default:
+        cout << "Please, insert an applicable number" << endl; sortFirearms();
         break;
     }
 }
@@ -365,7 +432,7 @@ void selection(int selection)
         searchFirearms();
         break;
     case 3:
-        cout << "Sort available firearms" << endl;
+        sortFirearms();
         break;
     case 4:
         sellFirearm();
