@@ -81,19 +81,19 @@ void insertWeaponData()
         globalId++;
     }
     //for, transferring data from the local array to the global one
-    for (int i = weaponCountBeforeAddition; i < (n + weaponCount); i++)
+    for (int i = weaponCountBeforeAddition; i < weaponCount; i++)
     {
-        Weapons[i].id = weapon[i].id;
-        Weapons[i].w_name = weapon[i].w_name;
-        Weapons[i].w_manufacturer = weapon[i].w_manufacturer;
-        Weapons[i].w_manufactureYear = weapon[i].w_manufactureYear;
-        Weapons[i].cleanPrice= weapon[i].cleanPrice;
-        Weapons[i].w_hasAttachment = weapon[i].w_hasAttachment;
-        if (weapon[i].w_hasAttachment == true)
+        Weapons[i].id = weapon[i - weaponCountBeforeAddition].id;
+        Weapons[i].w_name = weapon[i - weaponCountBeforeAddition].w_name;
+        Weapons[i].w_manufacturer = weapon[i - weaponCountBeforeAddition].w_manufacturer;
+        Weapons[i].w_manufactureYear = weapon[i - weaponCountBeforeAddition].w_manufactureYear;
+        Weapons[i].cleanPrice= weapon[i - weaponCountBeforeAddition].cleanPrice;
+        Weapons[i].w_hasAttachment = weapon[i - weaponCountBeforeAddition].w_hasAttachment;
+        if (weapon[i - weaponCountBeforeAddition].w_hasAttachment == true)
         {
-            Weapons[i].w_attachment.att_type = weapon[i].w_attachment.att_type;
-            Weapons[i].w_attachment.att_position = weapon[i].w_attachment.att_position;
-            Weapons[i].priceWithAttachment = weapon[i].priceWithAttachment;
+            Weapons[i].w_attachment.att_type = weapon[i - weaponCountBeforeAddition].w_attachment.att_type;
+            Weapons[i].w_attachment.att_position = weapon[i - weaponCountBeforeAddition].w_attachment.att_position;
+            Weapons[i].priceWithAttachment = weapon[i - weaponCountBeforeAddition].priceWithAttachment;
         }
     }
     weaponCountBeforeAddition = weaponCount;
@@ -474,7 +474,7 @@ int main()
     {
         mainMenu();
     }
-    cout << "Goodbye!";
+    cout << "Goodbye!" << endl;
 }
 
 
