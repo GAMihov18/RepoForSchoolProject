@@ -30,18 +30,17 @@ struct WEAPON_DATA
     float priceWithAttachment;
 };
 
-//----------------------End of structure initialization-------------------------
+//-----------------------End of structure initialization--------------------------
 
-//--------------------Initialization of global variables-----------------------
+//---------------------Initialization of global variables-------------------------
 WEAPON_DATA Weapons[100];
 int weaponCount = 0;
 int weaponCountBeforeAddition = 0;
 int input = 1;
 int globalId = 0;
-//---------------------Start of function initializations------------------------
+//----------------------Start of function initializations-------------------------
 
-//--------------Function for inserting the data for the weapons-----------------
-
+//---------------Function for inserting the data for the weapons------------------
 void insertWeaponData()
 {
     WEAPON_DATA weapon[100];//Initialising local array
@@ -102,6 +101,7 @@ void insertWeaponData()
     weaponCountBeforeAddition = weaponCount;
 }
 
+//--------------------Function for displaying all the weapons---------------------
 void displayWeapons()
 {    
     //"for" printing out all the available weapons
@@ -132,11 +132,152 @@ void displayWeapons()
         cout << "-------------------------------------------------------"<<endl;
 	}
 }
-void searchFirearms()
-{
 
+//--------Function searching for weapons falling in a selected criteria-----------
+void searchSorting(float a,float b,int sel) 
+{
+    if (sel==1)
+    {
+        for (int i = 0; i < weaponCount; i++)
+        {
+            if (Weapons[i].w_manufactureYear > a && Weapons[i].w_manufactureYear < b)
+            {
+                cout << "Id: "; cout << Weapons[i].id;
+                cout << endl << "Name: "; cout << Weapons[i].w_name;
+                cout << endl << "Manufacturer: "; cout << Weapons[i].w_manufacturer;
+                cout << endl << "Year of Manufacturing: "; cout << Weapons[i].w_manufactureYear;
+                cout << endl << "Price: "; cout << Weapons[i].cleanPrice;
+                cout << endl << "Attachments: ";
+                if (Weapons[i].w_hasAttachment == true)
+                {
+                    cout << "Yes";
+                }
+                else
+                {
+                    cout << "No";
+                }
+                cout << endl;
+                if (Weapons[i].w_hasAttachment == true)
+                {
+                    cout << "Type of attachment: "; cout << Weapons[i].w_attachment.att_type;
+                    cout << endl << "Attachment position: "; cout << Weapons[i].w_attachment.att_position;
+                    cout << endl << "Price of weapon with the attachments: "; cout << Weapons[i].priceWithAttachment;
+                    cout << endl;
+                }
+                cout << "-------------------------------------------------------" << endl;
+            }
+        }
+    }
+    else if(sel==2)
+    {
+        for (int i = 0; i < weaponCount; i++)
+        {
+            if (Weapons[i].cleanPrice > a&& Weapons[i].cleanPrice < b)
+            {
+                cout << "Id: "; cout << Weapons[i].id;
+                cout << endl << "Name: "; cout << Weapons[i].w_name;
+                cout << endl << "Manufacturer: "; cout << Weapons[i].w_manufacturer;
+                cout << endl << "Year of Manufacturing: "; cout << Weapons[i].w_manufactureYear;
+                cout << endl << "Price: "; cout << Weapons[i].cleanPrice;
+                cout << endl << "Attachments: ";
+                if (Weapons[i].w_hasAttachment == true)
+                {
+                    cout << "Yes";
+                }
+                else
+                {
+                    cout << "No";
+                }
+                cout << endl;
+                if (Weapons[i].w_hasAttachment == true)
+                {
+                    cout << "Type of attachment: "; cout << Weapons[i].w_attachment.att_type;
+                    cout << endl << "Attachment position: "; cout << Weapons[i].w_attachment.att_position;
+                    cout << endl << "Price of weapon with the attachments: "; cout << Weapons[i].priceWithAttachment;
+                    cout << endl;
+                }
+                cout << "-------------------------------------------------------" << endl;
+            }
+        }
+    }
+    else if (sel==3)
+    {
+        for (int i = 0; i < weaponCount; i++)
+        {
+            if (Weapons[i].priceWithAttachment > a&& Weapons[i].priceWithAttachment < b)
+            {
+                cout << "Id: "; cout << Weapons[i].id;
+                cout << endl << "Name: "; cout << Weapons[i].w_name;
+                cout << endl << "Manufacturer: "; cout << Weapons[i].w_manufacturer;
+                cout << endl << "Year of Manufacturing: "; cout << Weapons[i].w_manufactureYear;
+                cout << endl << "Price: "; cout << Weapons[i].cleanPrice;
+                cout << endl << "Attachments: ";
+                if (Weapons[i].w_hasAttachment == true)
+                {
+                    cout << "Yes";
+                }
+                else
+                {
+                    cout << "No";
+                }
+                cout << endl;
+                if (Weapons[i].w_hasAttachment == true)
+                {
+                    cout << "Type of attachment: "; cout << Weapons[i].w_attachment.att_type;
+                    cout << endl << "Attachment position: "; cout << Weapons[i].w_attachment.att_position;
+                    cout << endl << "Price of weapon with the attachments: "; cout << Weapons[i].priceWithAttachment;
+                    cout << endl;
+                }
+                cout << "-------------------------------------------------------" << endl;
+            }
+        }
+    }
 }
 
+//------------------------Function sorting the firearms---------------------------
+void sortFirearms() 
+{
+    WEAPON_DATA temp;
+
+}
+ 
+//---------------------Gives data to the previous function------------------------
+void searchFirearms()
+{
+    int selection;
+    cout << "+--------------------------------------------+" << endl;
+    cout << "|     Select a criteria for your search      |" << endl;
+    cout << "|                                            |" << endl;
+    cout << "|  1. Span of year of manufacturing(from-to) |" << endl;
+    cout << "|  2. Span of price(from-to)                 |" << endl;
+    cout << "|  3. Span of price with attacments(from-to) |" << endl;
+    cout << "|                                            |" << endl;
+    cout << "+--------------------------------------------+" << endl;
+    cout << ":"; cin >> selection;
+    switch (selection)
+    {
+    case 1:
+        int fromYear, toYear;
+        cout << "Please insert start of span and end of span(from to):"; cin >> fromYear >> toYear;
+        searchSorting(fromYear,toYear, selection);
+        break;
+    case 2:
+        float fromPrice, toPrice;
+        cout << "Please insert start of span and end of span(from to):"; cin >> fromPrice >> toPrice;
+        searchSorting(fromPrice, toPrice, selection);
+        break;
+    case 3:
+        float fromAttPrice, toAttPrice;
+        cout << "Please insert start of span and end of span(from to):"; cin >> fromAttPrice >> toAttPrice;
+        searchSorting(fromAttPrice, toAttPrice, selection);
+        break;  
+    default:
+        cout << "Please select a viable number."; searchFirearms();
+        break;
+    }
+}
+
+//----------------Sells a firearm, removing it from the database------------------
 void sellFirearm()
 {
     int desiredID;//initialising an int for an ID
@@ -211,6 +352,7 @@ void sellFirearm()
     }
 }
 
+//----------Function, utilizing the selection from the function ahead-------------
 void selection(int selection)
 {
     //Switch-case selecting the different menus
@@ -220,7 +362,7 @@ void selection(int selection)
 		displayWeapons();
         break;
     case 2:
-        cout << "Search available firearms" << endl;
+        searchFirearms();
         break;
     case 3:
         cout << "Sort available firearms" << endl;
@@ -269,3 +411,11 @@ int main()
     }
     cout << "Goodbye!";
 }
+
+
+/*
+Copyright© Georgi Mihov/Emily Kehayova/Alexandra Laleva/Boris Milev
+
+We state that there are no copied lines of code. Everything is personally
+written by the hands of the members stated above.
+*/
